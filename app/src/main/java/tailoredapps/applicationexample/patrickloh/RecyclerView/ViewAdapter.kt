@@ -13,11 +13,12 @@ import tailoredapps.applicationexample.patrickloh.R
 
 class ViewAdapter(items : MutableList<RepoModel>, ViewContext: Context) : RecyclerView.Adapter<ViewHolder>()
 {
-    val repositories = items
-    val context = ViewContext
+    private val repositories = items
+    private val context = ViewContext
 
+    // creates the viewholder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent?.context)
+        val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.list_item, parent, false)
         return ViewHolder(cellForRow)
     }
@@ -26,17 +27,19 @@ class ViewAdapter(items : MutableList<RepoModel>, ViewContext: Context) : Recycl
         return repositories.size
     }
 
+    // get and bind item
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val clickedItem = repositories[position]
-        holder?.bind(clickedItem, context)
+        val currentItem = repositories[position]
+        holder.bind(currentItem, context)
     }
 }
 
-class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
 {
     private var repo: RepoModel? = null
     private var context: Context? = null
 
+    // setup clicklistener to the current item
     init {
         view.setOnClickListener {
             val intent = Intent(context, DetailsActivity::class.java)
@@ -45,6 +48,7 @@ class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
         }
     }
 
+    // bind data to the current item
     fun bind(repo: RepoModel, context: Context)
     {
         this.repo = repo
@@ -54,7 +58,8 @@ class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
         view.tv_date?.text = repo.created_at
     }
 
+    // key for serialization
     companion object {
-        private val ITEM_KEY = "item"
+        private const val ITEM_KEY = "item"
     }
 }

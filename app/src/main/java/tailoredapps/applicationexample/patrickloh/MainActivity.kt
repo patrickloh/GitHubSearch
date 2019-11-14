@@ -16,10 +16,13 @@ import tailoredapps.applicationexample.patrickloh.Models.RepoModel
 
 class MainActivity : AppCompatActivity() {
 
-    // Initializing an empty ArrayList to be filled with repos
+    private val TAG = "MainActivity"
+
+    // Initializing an empty ArrayList to be filled
     var repositories: MutableList<RepoModel> = ArrayList()
     val dummy: MutableList<RepoModel> = ArrayList()
 
+    // Initializing variables for pagination
     var page = 1
     var scrollPage = 0
     var isLoading = false
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         progressbar.visibility = View.INVISIBLE
 
+        // override the scrolllistener
         rv_list.addOnScrollListener(object : RecyclerView.OnScrollListener()
         {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -67,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // Task for downloading data in the background
     inner class AsyncTaskHandler:AsyncTask<String, Void, MutableList<RepoModel>>() {
 
         override fun onPreExecute() {
@@ -89,8 +94,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Button
     fun doSearch(view: View) {
         search = findViewById(R.id.search)
+        dummy.clear()
 
         if (search.text.toString() != "") {
             val searchResult = search.text.toString() + "&page=" + page.toString()
@@ -101,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Pagination
     fun getPage() {
         isLoading = true
         progressbar.visibility = View.VISIBLE
@@ -109,22 +117,21 @@ class MainActivity : AppCompatActivity() {
         val end = ((scrollPage +1) * limit) -1
 
         if(end<=repositories.size) {
-            for(i in start..end)
-            {
-                if (repositories.size != 0)
+            if (repositories.size != 0) {
+                for(i in start..end) {
                     dummy.add(repositories[i])
-                else
-                    Toast.makeText(this, "Something went wrong while downloading", Toast.LENGTH_SHORT).show()
+                }
             }
+        }
+        else if(repositories.size == 0){
+            Toast.makeText(this, "Can't find repositories for: "+search.text.toString(), Toast.LENGTH_SHORT).show()
         }
 
         Handler().postDelayed({
-            if(::adapter.isInitialized)
-            {
+            if(::adapter.isInitialized) {
                 adapter.notifyDataSetChanged()
             }
-            else
-            {
+            else {
                 // Access the RecyclerView Adapter and load the data into it
                 adapter = ViewAdapter(dummy, this)
                 rv_list.adapter = adapter
