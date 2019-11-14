@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="13sp"
+        android:textColor="#aaaaaa"/>
+    <TextView
+        android:id="@+id/details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sometext"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Owner"
+        android:textSize="13sp"
+        android:textColor="#aaaaaa"/>
+    <TextView
+        android:id="@+id/details_owner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sometext"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="13sp"
+        android:textColor="#aaaaaa"/>
+    <TextView
+        android:id="@+id/details_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sometext"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Created at"
+        android:textSize="13sp"
+        android:textColor="#aaaaaa"/>
+    <TextView
+        android:id="@+id/details_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sometext"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        android:textSize="13sp"
+        android:textColor="#aaaaaa"/>
+    <TextView
+        android:id="@+id/details_language"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sometext"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Score"
+        android:textSize="13sp"
+        android:textColor="#aaaaaa"/>
+    <TextView
+        android:id="@+id/details_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="sometext"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/bt_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="go to repository"
+        android:onClick="openRepo" />
+
+</LinearLayout>
