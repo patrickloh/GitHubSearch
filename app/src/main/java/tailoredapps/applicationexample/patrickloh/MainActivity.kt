@@ -43,31 +43,26 @@ class MainActivity : AppCompatActivity() {
         rv_list.addOnScrollListener(object : RecyclerView.OnScrollListener()
         {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val visibleItemCount = layoutManager.childCount
+                val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
+                val total = adapter.itemCount
 
-                //if (dy > 0) {
-                    val visibleItemCount = layoutManager.childCount
-                    val pastVisibleItem = layoutManager.findFirstCompletelyVisibleItemPosition()
-                    val total = adapter.itemCount
-
-                    if (!isLoading)
-                    {
-                        if ((visibleItemCount + pastVisibleItem) >= total) {
-                            if(total%30 == 0)
-                            {
-                                scrollPage = 0
-                                page++
-                                val searchResult = search.text.toString() + "&page=" + page.toString()
-                                AsyncTaskHandler().execute(searchResult)
-                            }
-                            else
-                            {
-                                scrollPage++
-                                getPage()
-                            }
+                if (!isLoading)
+                {
+                    if ((visibleItemCount + pastVisibleItem) >= total) {
+                        if(total%30 == 0) {
+                            scrollPage = 0
+                            page++
+                            val searchResult = search.text.toString() + "&page=" + page.toString()
+                            AsyncTaskHandler().execute(searchResult)
+                        }
+                        else {
+                            scrollPage++
+                            getPage()
                         }
                     }
-                //}
-                super.onScrolled(recyclerView, dx, dy)
+                }
+            super.onScrolled(recyclerView, dx, dy)
             }
         })
     }
