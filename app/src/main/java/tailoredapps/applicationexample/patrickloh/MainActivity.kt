@@ -97,6 +97,8 @@ class MainActivity : AppCompatActivity() {
     // Button
     fun doSearch(view: View) {
         search = findViewById(R.id.search)
+        scrollPage = 0
+        page = 0
         dummy.clear()
 
         if (search.text.toString() != "") {
